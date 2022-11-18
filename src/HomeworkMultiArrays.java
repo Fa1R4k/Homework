@@ -5,12 +5,13 @@ public class HomeworkMultiArrays {
     public static void main(String[] args) {
         task1();
         task2();
+        task3();
     }
 
     private static void task1() {
         System.out.println();
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter array dimension: ");
+        System.out.print("Enter array dimension[2 numbers]: ");
         int countArr = scanner.nextInt();
         int lengthArr = scanner.nextInt();
         int[] array = new int[countArr * lengthArr];
@@ -31,7 +32,7 @@ public class HomeworkMultiArrays {
     private static void task2() {
         System.out.println();
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter array dimension: ");
+        System.out.print("Enter array dimension[3 numbers]: ");
         int firstLength = scanner.nextInt();
         int secondLength = scanner.nextInt();
         int thirdLength = scanner.nextInt();
@@ -50,40 +51,65 @@ public class HomeworkMultiArrays {
         System.out.println(Arrays.deepToString(stringThreeDimensionalArray));
     }
 
+    private static void task3() {
+        System.out.println();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter array dimension[2 numbers]: ");
+        int[][] twoDimensionalArray = new int[scanner.nextInt()][scanner.nextInt()];
 
-    private static String numReplace(int num) {
-        switch (num) {
-            case 1 -> {
-                return "One";
-            }
-            case 2 -> {
-                return "Two";
-            }
-            case 3 -> {
-                return "Three";
-            }
-            case 4 -> {
-                return "Four";
-            }
-            case 5 -> {
-                return "Five";
-            }
-            case 6 -> {
-                return "Six";
-            }
-            case 7 -> {
-                return "Seven";
-            }
-            case 8 -> {
-                return "Eight";
-            }
-            case 9 -> {
-                return "Nine";
-            }
-            case 10 -> {
-                return "Ten";
+        for (int i = 0; i < twoDimensionalArray.length; i++) {
+            for (int j = 0; j < twoDimensionalArray[i].length; j++) {
+                twoDimensionalArray[i][j] = (int) (Math.random() * 1000);
             }
         }
-        return "null";
+        System.out.println(Arrays.deepToString(twoDimensionalArray));
+        System.out.println("Your numbers: ");
+        int num = scanner.nextInt();
+        boolean found = false;
+
+        for (int[] ints : twoDimensionalArray) {
+            for (int anInt : ints) {
+                if (anInt % num == 0) {
+                    System.out.println(anInt + " - number found!");
+                    found = true;
+                    break;
+                } else {
+                    System.out.println(anInt + " ");
+                }
+            }
+            if (found) {
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Number not found");
+        }
+    }
+
+
+    private static String numReplace(int num) {
+        return switch (num) {
+            case 1 -> "One";
+
+            case 2 -> "Two";
+
+            case 3 -> "Three";
+
+            case 4 -> "Four";
+
+            case 5 -> "Five";
+
+            case 6 -> "Six";
+
+            case 7 -> "Seven";
+
+            case 8 -> "Eight";
+
+            case 9 -> "Nine";
+
+            case 10 -> "Ten";
+
+            default -> "null";
+        };
     }
 }
