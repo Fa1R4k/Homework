@@ -65,27 +65,19 @@ public class HomeworkMultiArrays {
         System.out.println(Arrays.deepToString(twoDimensionalArray));
         System.out.println("Your numbers: ");
         int num = scanner.nextInt();
-        boolean found = false;
 
         for (int[] ints : twoDimensionalArray) {
             for (int anInt : ints) {
                 if (anInt % num == 0) {
                     System.out.println(anInt + " - number found!");
-                    found = true;
-                    break;
+                    return;
                 } else {
                     System.out.println(anInt + " ");
                 }
             }
-            if (found) {
-                break;
-            }
         }
-        if (!found) {
-            System.out.println("Number not found");
-        }
+        System.out.println("The number was not found");
     }
-
 
     private static String numReplace(int num) {
         return switch (num) {
