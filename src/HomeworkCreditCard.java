@@ -38,11 +38,17 @@ class CreditCard {
     }
 
     public void addMoney(double count) {
+        System.out.println("Success!");
         accountMoney += count;
     }
 
     public void withdrawMoney(double count) {
-        accountMoney -= count;
+        if (accountMoney > count && count != 0) {
+            accountMoney -= count;
+            System.out.println("Success!");
+        } else {
+            System.out.println("Not enough money...");
+        }
     }
 
     public void information() {
