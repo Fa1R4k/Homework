@@ -52,7 +52,6 @@ public class HomeworkMultiArrays {
     }
 
     private static void task3() {
-        System.out.println();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter array dimension[2 numbers]: ");
         int[][] twoDimensionalArray = new int[scanner.nextInt()][scanner.nextInt()];
