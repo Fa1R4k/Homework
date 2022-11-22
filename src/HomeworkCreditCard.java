@@ -6,10 +6,9 @@ public class HomeworkCreditCard {
         CreditCard secondCard = new CreditCard("BY1231BEL", Math.random() * 100 + 1);
         CreditCard thirdCard = new CreditCard("BY1322BNB", Math.random() * 100 + 1);
 
-        firstCard.information();
-        secondCard.information();
-        thirdCard.information();
-
+        firstCard.getInformation();
+        secondCard.getInformation();
+        thirdCard.getInformation();
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the deposit amount: ");
@@ -22,9 +21,9 @@ public class HomeworkCreditCard {
         thirdCard.withdrawMoney(scanner.nextDouble());
         System.out.println();
 
-        firstCard.information();
-        secondCard.information();
-        thirdCard.information();
+        firstCard.getInformation();
+        secondCard.getInformation();
+        thirdCard.getInformation();
     }
 }
 
@@ -38,16 +37,21 @@ class CreditCard {
     }
 
     public void addMoney(double count) {
+        System.out.println("Success!");
         accountMoney += count;
     }
 
     public void withdrawMoney(double count) {
-        accountMoney -= count;
+        if (accountMoney > count && count != 0) {
+            accountMoney -= count;
+            System.out.println("Success!");
+        } else {
+            System.out.println("Not enough money!!!!!");
+        }
     }
 
-    public void information() {
+    public void getInformation() {
         System.out.println("AccountNumber: " + accountNumber);
         System.out.println("AccountMoney: " + String.format("%.2f", accountMoney) + "$\n");
-
     }
 }
