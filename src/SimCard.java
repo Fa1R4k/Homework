@@ -20,11 +20,11 @@ public class SimCard {
     }
 
     public String getOperatorName() {
-        return "";
+        return "operatorName";
     }
 
     public void makeCall(String number) {
-
+        System.out.println("Звоню на номер: " + number);
     }
 
     public void receiveCall(String number) {

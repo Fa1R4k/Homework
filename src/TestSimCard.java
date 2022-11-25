@@ -2,24 +2,26 @@ import java.util.Scanner;
 
 public class TestSimCard {
     public static void main(String[] args) {
+        Phone myPhone = new Phone(randomSimCard());
+        myPhone.infoSim();
+
         SimCard[] simCards = new SimCard[(int) (Math.random() * 10 + 1)];
         for (int i = 0; i < simCards.length; i++) {
             simCards[i] = randomOperator();
         }
 
-        Phone myPhone = new Phone(randomSimCard());
-        myPhone.infoSim();
-
         for (int i = 0; i < simCards.length; i += 2) {
             myPhone.makeCall(simCards[i].getNumber());
             System.out.print("Ваш баланс: ");
             myPhone.printBalance();
+            System.out.println();
         }
 
         for (int i = 1; i < simCards.length; i += 2) {
             myPhone.receiveCall(simCards[i].getNumber());
             System.out.print("Ваш баланс: ");
             myPhone.printBalance();
+            System.out.println();
         }
     }
 
