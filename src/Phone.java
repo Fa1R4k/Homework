@@ -13,12 +13,6 @@ public class Phone {
                 ". Ваш баланс: " + sim.getBalance() + "bn.");
     }
 
-    public void infoSim() {
-        System.out.println("Номер новой сим карты: " + sim.getNumber() +
-                ". Имя оператора:  " + sim.getOperatorName() +
-                ". Ваш баланс: " + sim.getBalance() + " bn.");
-    }
-
     public void makeCall(String number) {
         sim.makeCall(number);
     }
