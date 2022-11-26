@@ -1,7 +1,11 @@
 public final class MtsSimCard extends SimCard {
 
-    public MtsSimCard(double balance, String number) {
-        super(balance, "29" + number);
+    public MtsSimCard(double balance, String number, String pin) {
+        super(balance, "29" + number, pin);
+        System.out.println("Оператор сим-карты: " + getOperatorName() +
+                ". Номер сим-карты: " + getNumber() +
+                ". Баланс сим-карты: " + getBalance() +
+                ". Пин код сим-карты: " + pin + ".");
     }
 
     @Override

@@ -1,7 +1,11 @@
 public final class A1SimCard extends SimCard {
 
-    public A1SimCard(double balance, String number) {
-        super(balance, "33" + number);
+    public A1SimCard(double balance, String number, String pin) {
+        super(balance, "33" + number, pin);
+        System.out.println("Оператор сим-карты: " + getOperatorName() +
+                ". Номер сим-карты: " + getNumber() +
+                ". Баланс сим-карты: " + getBalance() +
+                ". Пин код сим-карты: " + pin + ".");
     }
 
     @Override

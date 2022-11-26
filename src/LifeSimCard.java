@@ -1,7 +1,11 @@
 public final class LifeSimCard extends SimCard {
 
-    public LifeSimCard(double balance, String number) {
-        super(balance, "44" + number);
+    public LifeSimCard(double balance, String number, String pin) {
+        super(balance, "44" + number, pin);
+        System.out.println("Оператор сим-карты: " + getOperatorName() +
+                ". Номер сим-карты: " + getNumber() +
+                ". Баланс сим-карты: " + getBalance() +
+                ". Пин код сим-карты: " + pin + ".");
     }
 
     @Override
