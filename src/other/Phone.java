@@ -1,3 +1,5 @@
+package other;
+
 public class Phone {
 
     private SimCard sim;

@@ -1,3 +1,5 @@
+package other;
+
 public class BlockedSimCard extends SimCard {
 
     public BlockedSimCard(double balance, String number, String pin) {

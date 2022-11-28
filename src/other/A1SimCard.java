@@ -1,7 +1,9 @@
-public final class MtsSimCard extends SimCard {
+package other;
 
-    public MtsSimCard(double balance, String number, String pin) {
-        super(balance, "29" + number, pin);
+public final class A1SimCard extends SimCard {
+
+    public A1SimCard(double balance, String number, String pin) {
+        super(balance, "33" + number, pin);
         System.out.println("Оператор сим-карты: " + getOperatorName() +
                 ". Номер сим-карты: " + getNumber() +
                 ". Баланс сим-карты: " + getBalance() +
@@ -10,7 +12,7 @@ public final class MtsSimCard extends SimCard {
 
     @Override
     public String getOperatorName() {
-        return "Mts";
+        return "A1";
     }
 
     @Override
@@ -24,7 +26,6 @@ public final class MtsSimCard extends SimCard {
         }
     }
 
-    @Override
     public void receiveCall(String number) {
         int price = checkMobileOperator(number) ? 0 : 1;
         setBalance(getBalance() - price);
@@ -32,6 +33,6 @@ public final class MtsSimCard extends SimCard {
     }
 
     private static boolean checkMobileOperator(String number) {
-        return number.startsWith("29");
+        return number.startsWith("33");
     }
 }
