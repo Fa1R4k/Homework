@@ -5,26 +5,10 @@ import java.util.Scanner;
 public class Homework {
 
     public static void main(String[] args) {
-        handlerException();
+        registration();
     }
 
-    private static void handlerException() {
-        boolean finalCheck = false;
-        try {
-            System.out.println(registration());
-            finalCheck = true;
-        } catch (WrongLoginException | WrongPasswordException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Повторите попытку!\n");
-            handlerException();
-        } finally {
-            if (finalCheck) {
-                System.out.println("Программа завершенна");
-            }
-        }
-    }
-
-    private static boolean registration() throws WrongLoginException, WrongPasswordException {
+    private static boolean registration() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите логин: ");
         String login = scanner.nextLine();
@@ -35,16 +19,42 @@ public class Homework {
         System.out.print("Повторно введите пароль: ");
         String verificationPassword = scanner.nextLine();
 
-        if (!login.matches("[A-z\\d_]*")) {
+        try {
+            checkLogic(login, password, verificationPassword);
+            System.out.println("Вы успешно зарегистрированы!");
+        } catch (WrongLoginException | WrongPasswordException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Повторите попытку!\n");
+            registration();
+        }
+        return true;
+    }
+
+    private static void checkLogic(String login, String password, String verificationPassword) throws WrongLoginException, WrongPasswordException {
+        if (checkLogin(login)) {
             throw new WrongLoginException("Неверные символы для логина." +
                     "(Используйте буквы латинского алфавита, цифры или символ \"_\")");
-        } else if (login.length() > 20) {
+        } else if (checkLengthLogin(login)) {
             throw new WrongLoginException("Неверная длинна логина.(Максимум 20 символов)");
         }
 
-        if (!verificationPassword.equals(password)) {
+        if (checkPassword(password, verificationPassword)) {
             throw new WrongPasswordException("Пароли не совпадают");
         }
-        return true;
+    }
+
+    private static boolean checkLogin(String login) {
+        final String LOGIN_REGEX = "[A-z\\d_]*";
+        return LOGIN_REGEX.equals(login);
+    }
+
+    private static boolean checkLengthLogin(String login) {
+        final int MAX_LOGIN_LENGTH = 20;
+        final int MIN_LOGIN_LENGTH = 1;
+        return !(MAX_LOGIN_LENGTH >= login.length() && login.length() >= MIN_LOGIN_LENGTH);
+    }
+
+    private static boolean checkPassword(String password, String verificationPassword) {
+        return !password.equals(verificationPassword);
     }
 }
