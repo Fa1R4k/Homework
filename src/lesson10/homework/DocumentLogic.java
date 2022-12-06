@@ -8,7 +8,7 @@ public class DocumentLogic {
         return documentNumber.matches(REGEX_DOCUMENT);
     }
 
-    public static void performAllFunctions(String documentNumber) {
+    public static void printAllInfo(String documentNumber) {
         DocumentLogic.printDigitsBlocks(documentNumber);
         DocumentLogic.printHiddenNumber(documentNumber);
         DocumentLogic.printLettersFormat(documentNumber);
@@ -16,16 +16,16 @@ public class DocumentLogic {
         DocumentLogic.checkEndsNumber(documentNumber);
     }
 
-    public static void printDigitsBlocks(String documentNumber) {
+    private static void printDigitsBlocks(String documentNumber) {
         System.out.println(documentNumber.substring(0, 4) + documentNumber.substring(8, 13));
     }
 
-    public static void printHiddenNumber(String documentNumber) {
+    private static void printHiddenNumber(String documentNumber) {
         String hiddenNumber = documentNumber.replaceAll("[A-z]", "*");
         System.out.println(hiddenNumber);
     }
 
-    public static void printLettersFormat(String documentNumber) {
+    private static void printLettersFormat(String documentNumber) {
         documentNumber = documentNumber.toUpperCase();
         StringBuilder documentNumberBuilder = new StringBuilder("Letters:");
         documentNumberBuilder
@@ -36,13 +36,13 @@ public class DocumentLogic {
         System.out.println(documentNumberBuilder);
     }
 
-    public static void checkABCSequence(String documentNumber) {
+    private static void checkABCSequence(String documentNumber) {
         documentNumber = documentNumber.toLowerCase();
         System.out.println("Ваш номер " + (documentNumber.contains("abc") ? "содержит " : "не содержит ")
                 + "последовательность \"abc\"");
     }
 
-    public static void checkEndsNumber(String documentNumber) {
+    private static void checkEndsNumber(String documentNumber) {
         System.out.println("Ваш номер заканчивается" + (documentNumber.endsWith("1a2b") ? " на " : " не на ")
                 + "\"1a2b\"");
     }

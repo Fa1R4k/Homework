@@ -11,6 +11,6 @@ public class Test {
             System.out.print("Не верный номер документ. Повторите попытку: ");
             documentNumber = scanner.nextLine();
         }
-        DocumentLogic.performAllFunctions(documentNumber);
+        DocumentLogic.printAllInfo(documentNumber);
     }
 }
