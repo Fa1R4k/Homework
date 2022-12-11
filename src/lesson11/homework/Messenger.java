@@ -6,14 +6,10 @@ import java.util.Scanner;
 public class Messenger {
     private static ArrayList<User> userList = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
-    private final static int EXIT_APP = 1;
+    private final static int EXIT_APP = 0;
     private final static int CONFIRM_DELETE_USER = 1;
 
     public static void main(String[] args) {
-        startApp();
-    }
-
-    private static void startApp() {
         chooseActionMainMenu();
     }
 
@@ -91,15 +87,20 @@ public class Messenger {
         int selectUser;
         do {
             selectUser = chooseAction() - 1;
-            if (!checkSelectUser(selectUser)) {
-                return userList.get(selectUser);
-            }
-            System.out.println("The input must contain only numbers[1-" + userList.size() + "]\n Try again:");
-        } while (true);
+        } while (checkSelectUser(selectUser));
+        return userList.get(selectUser);
+    }
+
+    private static void printNotification() {
+        System.out.println("The input must contain only numbers[1-" + userList.size() + "]\n Try again:");
     }
 
     private static boolean checkSelectUser(int selectUser) {
-        return selectUser > userList.size() - 1 || selectUser < 0;
+        if (selectUser > userList.size() - 1 || selectUser < 0) {
+            printNotification();
+            return true;
+        }
+        return false;
     }
 
     private static void printUserMenu(User user) {
