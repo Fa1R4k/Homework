@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Messenger {
-
     private static ArrayList<User> userList = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
+    private final static int EXIT_APP = 1;
+    private final static int CONFIRM_DELETE_USER = 1;
 
     public static void main(String[] args) {
         startApp();
@@ -29,13 +30,13 @@ public class Messenger {
     private static void chooseActionMainMenu() {
         printMainMenu();
         System.out.print("Choose your action: ");
-        int action = chooseAction();
+        MainMenuEnum action = MainMenuEnum.getActionMainMenu(chooseAction());
         switch (action) {
-            case 1 -> registerNewUser();
-            case 2 -> logInUser();
-            case 3 -> choseDeleteUser();
-            case 0 -> exit();
-            default -> System.out.println("The input must contain only numbers[1,2,3]");
+            case REGISTER_USER_ACTION -> registerNewUser();
+            case LOG_IN_USER_ACTION -> logInUser();
+            case DELETE_USER_ACTION -> choseDeleteUser();
+            case EXIT_ACTION -> exit();
+            case DEFAULT_ACTION -> System.out.println("The input must contain only numbers[1,2,3]");
         }
         chooseActionMainMenu();
     }
@@ -87,12 +88,18 @@ public class Messenger {
     private static User selectUser() {
         printUserList();
         System.out.print("Select user: ");
-        int selectUser = chooseAction() - 1;
-        while (selectUser > userList.size() - 1 || selectUser < 0) {
-            System.out.println("The input must contain only numbers[1-" + userList.size() + "]\n Try again:");
+        int selectUser;
+        do {
             selectUser = chooseAction() - 1;
-        }
-        return userList.get(selectUser);
+            if (!checkSelectUser(selectUser)) {
+                return userList.get(selectUser);
+            }
+            System.out.println("The input must contain only numbers[1-" + userList.size() + "]\n Try again:");
+        } while (true);
+    }
+
+    private static boolean checkSelectUser(int selectUser) {
+        return selectUser > userList.size() - 1 || selectUser < 0;
     }
 
     private static void printUserMenu(User user) {
@@ -114,13 +121,13 @@ public class Messenger {
     private static void chooseActionUserMenu(User user) {
         printUserMenu(user);
         System.out.print("Choose your action: ");
-        int action = chooseAction();
+        UserMenuEnum action = UserMenuEnum.getActionUserMenu(chooseAction());
         switch (action) {
-            case 1 -> sendMessage(user);
-            case 2 -> checkMessage(user);
-            case 3 -> confirmDeleteUser(user);
-            case 0 -> chooseActionMainMenu();
-            default -> System.out.println("The input must contain only numbers[0,1,2,3]");
+            case SEND_MESSAGE_ACTION -> sendMessage(user);
+            case CHECK_MESSAGES_ACTION -> checkMessage(user);
+            case DELETE_THIS_USER_ACTION -> confirmDeleteUser(user);
+            case BACK_TO_MENU_ACTION -> chooseActionMainMenu();
+            case DEFAULT_ACTION -> System.out.println("The input must contain only numbers[0,1,2,3]");
         }
         chooseActionUserMenu(user);
     }
@@ -138,7 +145,7 @@ public class Messenger {
                 """);
         System.out.print("The choice is yours: ");
         int action = chooseAction();
-        if (action == 1) {
+        if (CONFIRM_DELETE_USER == action) {
             deleteUser(user);
             chooseActionMainMenu();
         } else {
@@ -158,6 +165,6 @@ public class Messenger {
 
     private static void exit() {
         System.out.println("GoodBye");
-        System.exit(1);
+        System.exit(EXIT_APP);
     }
 }
