@@ -15,7 +15,7 @@ public class App {
         createPets();
         while (!pets.isEmpty()) {
             printPets();
-            deletePet();
+            deletePet(getConsolePet());
         }
         System.out.println("You list is empty. Goodbye!");
     }
@@ -39,19 +39,18 @@ public class App {
         }
     }
 
-    private static void deletePet() {
-        Pet deletedPet = pets.get(getConsolePetName());
-        System.out.println(deletedPet.toString() + " was successful delete.\n");
-        pets.remove(deletedPet.getName());
+    private static void deletePet(Pet pet) {
+        System.out.println(pet.toString() + " was successful delete.\n");
+        pets.remove(pet.getName());
     }
 
-    private static String getConsolePetName() {
+    private static Pet getConsolePet() {
         System.out.print("\nEnter the name of the pet you want to delete: ");
         String petName;
         do {
             petName = scanner.nextLine();
         } while (containsPet(petName));
-        return petName;
+        return pets.get(petName);
     }
 
     private static boolean containsPet(String petName) {
