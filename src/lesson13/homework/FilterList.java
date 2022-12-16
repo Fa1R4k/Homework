@@ -38,7 +38,6 @@ public class FilterList {
         do {
             size = scanner.nextLine();
         } while (checkSizeForNumbers(size));
-
         return Integer.parseInt(size);
     }
 
@@ -91,6 +90,4 @@ public class FilterList {
         double arithmeticMean = (double) (arrayList.stream().reduce(0, Integer::sum)) / arrayList.size();
         System.out.println("The arithmetic mean of your array: " + arithmeticMean);
     }
-
-
 }
