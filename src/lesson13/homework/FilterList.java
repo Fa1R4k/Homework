@@ -6,22 +6,18 @@ import java.util.Scanner;
 import java.util.function.Predicate;
 
 public class FilterList {
-    private static ArrayList<Integer> arrayList = new ArrayList<>();
+    private static List<Integer> arrayList = new ArrayList<>();
 
     public static void main(String[] args) {
         fillingArrayList();
         printArrayListWithDescription(arrayList, "You array: ");
-        printAllFunc();
-    }
-
-    private static void printAllFunc() {
-        printListWithoutDuplicate();
+        deleteDuplicate();
         printEvenElementsFrom7To17();
-        printAllListNumbersMultiplyByTwo();
-        printSortListFirstFour();
-        printElementsMoreThanTen();
+        multiplyAllElementsByTwo();
+        removeElementsLessThanTen();
         printCountList();
         printArithmeticMean();
+        printArrayListWithDescription(arrayList, "You array: ");
     }
 
     private static void fillingArrayList() {
@@ -54,18 +50,18 @@ public class FilterList {
         return false;
     }
 
-    private static void printListWithoutDuplicate() {
-        List<Integer> listWithoutDuplicate = arrayList.stream()
+    private static void deleteDuplicate() {
+        arrayList = arrayList.stream()
                 .distinct()
                 .toList();
-        printArrayListWithDescription(listWithoutDuplicate, "List without duplicate: ");
+        System.out.println("Duplicates have been deleted");
     }
 
-    private static void printAllListNumbersMultiplyByTwo() {
-        List<Integer> ListNumbersMultiplyByTwo = arrayList.stream()
+    private static void multiplyAllElementsByTwo() {
+        arrayList = arrayList.stream()
                 .map(num -> num * 2)
                 .toList();
-        printArrayListWithDescription(ListNumbersMultiplyByTwo, "List in which each number is multiplied by two: ");
+        System.out.println("Each element is multiplied by two");
     }
 
     private static void printEvenElementsFrom7To17() {
@@ -73,24 +69,16 @@ public class FilterList {
         List<Integer> listWithEvenElementsFrom7To17 = arrayList.stream()
                 .filter(predicate)
                 .toList();
-        printArrayListWithDescription(listWithEvenElementsFrom7To17, "List with even elements from 7 to 17: ");
+        printArrayListWithDescription(listWithEvenElementsFrom7To17, "Even elements from 7 to 17: ");
     }
 
-    private static void printSortListFirstFour() {
-        List<Integer> sortListFirstFour = arrayList.stream()
-                .sorted()
-                .limit(4)
-                .toList();
-        printArrayListWithDescription(sortListFirstFour, "Four elem from sorted list: ");
-    }
-
-    private static void printElementsMoreThanTen() {
+    private static void removeElementsLessThanTen() {
         Predicate<Integer> moreThatTen = n -> n > 10;
-        List<Integer> listWithElementsMoreThanTen = arrayList.stream()
+        arrayList = arrayList.stream()
                 .sorted()
                 .filter(moreThatTen)
                 .toList();
-        printArrayListWithDescription(listWithElementsMoreThanTen, "Elements more that ten from your list: ");
+        System.out.println("Elements less than 10 have been removed");
     }
 
     private static void printCountList() {
